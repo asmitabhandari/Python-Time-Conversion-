@@ -1,0 +1,70 @@
+﻿def display_menu():
+    print("""Enter--
+1: To convert time from 12-hour notation to 24-hour notation.
+2: To convert time from 24-hour notation to 12-hour notation.
+99: To quit the program.""")
+
+
+def get_time_12_hour():
+    h = int(input("Enter hours: "))
+    m = int(input("Enter minutes: "))
+    s = int(input("Enter seconds: "))
+    ap = input("Enter AM/PM: ").upper()
+    return h, m, s, ap
+
+
+def get_time_24_hour():
+    h = int(input("Enter hours: "))
+    m = int(input("Enter minutes: "))
+    s = int(input("Enter seconds: "))
+    return h, m, s
+
+
+def convert_to_24_hour(h, ap):
+    if ap == 'PM':
+        h += 12
+    return h
+
+
+def convert_to_12_hour(h):
+    if h == 0 or h == 12:
+        if h == 0:
+            h = 12
+        ap = "AM"
+    elif h < 12:
+        ap = "AM"
+    else:
+        h -= 12
+        ap = "PM"
+
+
+    return h, ap
+
+
+def main():
+    while True:
+        display_menu()
+        user_input = int(input())
+
+
+        if user_input == 1:
+            h, m, s, ap = get_time_12_hour()
+            h = convert_to_24_hour(h, ap)
+            print(f"The time is:\n{h:02d}:{m:02d}:{s:02d}")
+
+
+        elif user_input == 2:
+            h, m, s = get_time_24_hour()
+            h, ap = convert_to_12_hour(h)
+            print(f"The time is:\n{h:02d}:{m:02d}:{s:02d} {ap}")
+
+
+        elif user_input == 99:
+            break
+
+
+        else:
+            print("Invalid input")
+
+
+main()
